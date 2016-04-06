@@ -114,6 +114,7 @@ def find_max_guesses():
 
 
 def play_ball():
+    ''' this function starts the game. the function calls other function to gather information needed to play the game:'''
     current_blank = 1
     challenge = select_game_difficulty()
     paragraph, triviaanswers = send_me_my_trivia(challenge)
