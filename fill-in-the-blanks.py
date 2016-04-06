@@ -33,7 +33,7 @@ hard_answers = ['Python',
  'applications',
  'databases']
 
- def select_game_difficulty():
+def select_game_difficulty():
     """hello I'm a function that will help the user decide on the challenge level. As a function I'm going to ask the user to select one 
     of three options Easy, Medium or Hard to determine the difficulty in the trivia quiz returned"""
     print  "Welcome to the fill in the blank game. Choose your level of diffculty, Easy, Medium and Hard"
@@ -113,20 +113,18 @@ def find_max_guesses():
             print "That isn't an integer!\n"
 
 
+def play_ball():
+    current_blank = 1
+    challenge = select_game_difficulty()
+    paragraph, triviaanswers = send_me_my_trivia(challenge)
+    max_guesses = find_max_guesses()
+    while current_blank <= len(triviaanswers):
+        paragraph, current_blank = ask_question(paragraph, current_blank, triviaanswers[current_blank - 1], max_guesses)
+        if paragraph is None:
+            print "You've failed too many straight guesses!  Game over!"
+            return False
 
-current_blank = 1
-select_game_difficulty()
-send_me_my_trivia(answer)
-max_guesses = find_max_guesses()
-    while current_blank <= len(easy_answers): 
-        easy_paragraph, current_blank = ask_question(easy_paragraph, current_blank, easy_answers[current_blank - 1], max_guesses)
-        if hard_paragraph is None:
-            print "You've failed too many straight guesses!  Game over!"
-    while current_blank <= len(hard_answers):
-        hard_paragraph, current_blank = ask_question(hard_paragraph, current_blank, hard_answers[current_blank - 1], max_guesses)
-        if hard_paragraph is None:
-                print "You've failed too many straight guesses!  Game over!"
-    while current_blank <= len(medium_answers):
-        medium_paragraph, current_blank = ask_question(medium_paragraph, current_blank, medium_answers[current_blank - 1], max_guesses)
-        if medium_paragraph is None:
-            print "You've failed too many straight guesses!  Game over!"
+    print paragraph + '\nYou won!\n'
+    return True
+
+play_ball()
